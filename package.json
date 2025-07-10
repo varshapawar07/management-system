@@ -1,5 +1,15 @@
 {
+  "name": "your-project-name",
+  "version": "1.0.0",
   "dependencies": {
-    "mongoose": "^8.14.3"
+    "mongoose": "^8.14.3",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   }
 }
