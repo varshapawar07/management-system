@@ -1,0 +1,306 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Academic Information</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #eef2f5;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background-color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #27ae60;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        margin-right: 8%;
+      }
+
+      .nav-links li { display: inline; }
+
+      .nav-links a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .active { color: #27ae60; }
+
+      .profile-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-left: 20px;
+        cursor: pointer;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 100px auto 40px auto;
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 100px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #d1d1d1;
+        padding-bottom: 8px;
+        margin-top: 40px;
+      }
+
+      .year-section { margin-bottom: 30px; }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .field-group {
+        flex: 1;
+        min-width: 280px;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1.5px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="file"]:focus {
+        outline: none;
+        border-color: #2773ae;
+      }
+
+      .button-container {
+      margin-top: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly; /* Center align the buttons */
+      gap: 20px; /* Equal space between buttons */
+  }
+
+  .nav-btn {
+    padding: 10px 24px; /* Reduced size, like Documentation section */
+    font-size: 16px; /* Slightly smaller text */
+    font-weight: 500;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    min-width: 80px; /* Equal button width */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+
+  .nav-btn:hover {
+    background-color: #0056b3; /* Darker on hover */
+  }
+
+
+      .file-upload { position: relative; }
+
+      .file-info {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .view-btn, .remove-btn {
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .view-btn { background-color: #0275d8; }
+      .view-btn:hover { background-color: #025aa5; }
+
+      .remove-btn { background-color: #d9534f; }
+      .remove-btn:hover { background-color: #c9302c; }
+    </style>
+  </head>
+  <body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">StudentSys</div>
+    <ul class="nav-links">
+      <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="student-dashboard.html" class="active">Services</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+      <li>
+        <div class="profile-icon" onclick="location.href='student-dashboard.html'">U</div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Academic Information Form</h1>
+    <form id="academicForm">
+      <!-- Placeholder for dynamic content -->
+      <div class="button-container">
+        <button type="button" class="nav-btn" onclick="goBack()">← Back</button>
+        <button type="button" class="nav-btn" onclick="saveAcademicInfo()">Save</button>
+        <button type="button" class="nav-btn" onclick="goNext()">Next →</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Generate 4-year form dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("academicForm");
+      const buttonContainer = form.querySelector(".button-container");
+
+      for (let year = 1; year <= 4; year++) {
+        const yearDiv = document.createElement("div");
+        yearDiv.className = "year-section";
+        yearDiv.innerHTML = `
+          <h2>${year}${year === 1 ? 'st' : year === 2 ? 'nd' : year === 3 ? 'rd' : 'th'} Year</h2>
+          <div class="row">
+            <div class="field-group">
+              <label>Semester 1 SGPA</label>
+              <input type="text" name="sgpa${(year - 1) * 2 + 1}" placeholder="e.g. 8.5">
+              <label>Upload Semester 1 Marksheet</label>
+              <div class="file-upload">
+                <input type="file" name="marksheet${(year - 1) * 2 + 1}" onchange="handleFileChange(this)">
+                <div class="file-info" style="display: none;">
+                  <button type="button" class="view-btn" onclick="viewFile(this)">View</button>
+                  <button type="button" class="remove-btn" onclick="removeFile(this)">Remove</button>
+                </div>
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Semester 2 SGPA</label>
+              <input type="text" name="sgpa${(year - 1) * 2 + 2}" placeholder="e.g. 8.4">
+              <label>Upload Semester 2 Marksheet</label>
+              <div class="file-upload">
+                <input type="file" name="marksheet${(year - 1) * 2 + 2}" onchange="handleFileChange(this)">
+                <div class="file-info" style="display: none;">
+                  <button type="button" class="view-btn" onclick="viewFile(this)">View</button>
+                  <button type="button" class="remove-btn" onclick="removeFile(this)">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <label>CGPA (${year}${year === 1 ? 'st' : year === 2 ? 'nd' : year === 3 ? 'rd' : 'th'} Year)</label>
+          <input type="text" name="cgpa${year}" placeholder="e.g. 8.35">
+        `;
+        form.insertBefore(yearDiv, buttonContainer);
+      }
+    });
+
+    function handleFileChange(input) {
+      const fileInfo = input.parentElement.querySelector(".file-info");
+      if (input.files.length > 0) {
+        fileInfo.style.display = "flex";
+      } else {
+        fileInfo.style.display = "none";
+      }
+    }
+
+    function viewFile(button) {
+      const input = button.closest(".file-upload").querySelector("input[type='file']");
+      const file = input.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        window.open(url, "_blank");
+      }
+    }
+
+    function removeFile(button) {
+      const uploadDiv = button.closest(".file-upload");
+      const input = uploadDiv.querySelector("input[type='file']");
+      const fileInfo = uploadDiv.querySelector(".file-info");
+
+      input.value = "";
+      fileInfo.style.display = "none";
+    }
+
+    function saveAcademicInfo() {
+      const form = document.getElementById("academicForm");
+      const formData = new FormData(form);
+      let academicInfo = {};
+
+      formData.forEach((value, key) => {
+        if (value instanceof File && value.name) {
+          academicInfo[key] = value.name;
+        } else if (value) {
+          academicInfo[key] = value;
+        }
+      });
+
+      localStorage.setItem("academicData", JSON.stringify(academicInfo));
+      alert("Academic information saved locally (simulated).");
+      console.log("Saved Data:", academicInfo);
+    }
+
+    function goBack() {
+      // Replace with actual previous section route
+      window.location.href = "documents.html";
+    }
+
+    function goNext() {
+      // Replace with actual next section route
+      window.location.href = "placement.html";
+    }
+  </script>
+
+  </body>
+  </html>
+  

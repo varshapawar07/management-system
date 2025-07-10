@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document Upload Section</title>
+  <style>
+    body, html {
+      margin: 0;  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .navbar {
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin-right: 8%;
+      align-items: center;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .active {
+      color: #27ae60;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .documents-container {
+       
+  max-width: 1200px;     /* Increase this if you want a larger max limit */
+  width: 80%;            /* Increase this to occupy more horizontal space */
+  margin: 30px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+
+  /* Remove this line - it's invalid and has no effect */
+  /* border-width: 100px; */
+
+
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+
+    .documents-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .document-item {
+      background: #f7f9fa;
+      padding: 20px;
+      border-left: 6px solid #3498db;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .document-item:hover {
+      background: #eef4f7;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #34495e;
+      display: block;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      border: 1px solid #dcdde1;
+      border-radius: 6px;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    .file-options {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .view-btn, .remove-btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+    }
+
+    .view-btn {
+      background: #2ecc71;
+    }
+
+    .view-btn:hover {
+      background: #27ae60;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+    }
+
+    .remove-btn:hover {
+      background: #c0392b;
+    }
+
+    .button-row {
+      margin: 30px auto;
+      max-width: 1000px;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 0 30px;
+    }
+
+    .back-btn, .next-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .back-btn:hover, .next-btn:hover {
+      background-color: #007bff;
+    }
+    /* Reusable Button Style for Save/Submit */
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-left: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #007bff;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Updated Navbar -->
+  <nav class="navbar">
+    <div class="logo">StudentSys</div>
+    <ul class="nav-links">
+       <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="student-dashboard.html"> Services</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+
+           <li>
+         <div class="profile-icon" onclick="location.href='studentprofile.html'">U</div>
+     </li>
+    
+    </ul>
+  </nav>
+
+  <!-- Document Upload Container -->
+  <div class="documents-container">
+    <h2>Upload Required Documents</h2>
+    <div class="documents-list" id="documentsList"></div>
+  </div>
+
+  <!-- Button Row -->
+  <div class="button-row">
+    <button class="back-btn" onclick="window.location.href='academicinfo.html'">← Back</button>
+    <button class="submit-btn" onclick="saveDocuments()">Save</button>
+    <button class="next-btn" onclick="window.location.href='academicinfos.html'">Next →</button>
+  </div>
+
+  <script>
+    const category = "OPEN"; // Replace with dynamic category value
+
+    const categoryDocuments = {
+      OPEN: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate",
+        "Death Certificate of Parent (if applicable)", "SSC", "HSC", "Diploma Marksheet",
+        "Leaving Certificate", "Aadhar Card", "Bank Passbook", "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      OBC: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Caste Certificate",
+        "Caste Validity Certificate", "Non-Creamy Layer Certificate", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem",
+        "Leaving Certificate", "Aadhar Card", "Bank Passbook", "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      SC: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Death Certificate of Parent (if applicable)",
+        "Tribe Certificate", "Caste Validity Certificate", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate", "Aadhar Card", "Bank Passbook",
+        "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      ST: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Death Certificate of Parent (if applicable)",
+        "Tribe Certificate", "Caste Validity Certificate", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate", "Aadhar Card", "Bank Passbook",
+        "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      EBC: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Death Certificate of Parent (if applicable)",
+        "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate", "Aadhar Card", "Bank Passbook", "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      SBC: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Death Certificate of Parent (if applicable)",
+        "Caste Certificate", "Caste Validity Certificate", "Non-Creamy Layer Certificate", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate",
+        "Aadhar Card", "Bank Passbook", "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      VJNT: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate", "Death Certificate of Parent (if applicable)",
+        "Caste Certificate", "Caste Validity Certificate", "Non-Creamy Layer Certificate", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate",
+        "Aadhar Card", "Bank Passbook", "Ration Card", "GAP Certificate (if applicable)"
+      ],
+      General: [
+        "CAP Allotment Letter", "Bonafide Certificate", "Domicile & Nationality Certificate", "Parents’ Income Certificate",
+        "Death Certificate of Parent (if applicable)", "SSC", "HSC", "Diploma Marksheet 5 and 6 sem", "Leaving Certificate", "Aadhar Card", "Bank Passbook",
+        "Ration Card", "GAP Certificate (if applicable)"
+      ]
+    };
+
+    const uploadedDocuments = {};
+
+    function renderDocumentList() {
+      const container = document.getElementById("documentsList");
+      container.innerHTML = "";
+      const docs = categoryDocuments[category] || [];
+      docs.forEach(doc => {
+        const id = doc.replace(/\s/g, '');
+        const item = document.createElement("div");
+        item.className = "document-item";
+        item.innerHTML = `
+          <label>${doc}</label>
+          <input type="file" accept=".pdf,.jpg,.png" onchange="handleFileUpload('${id}', '${doc}', event)">
+          <div class="file-options" id="file-${id}"></div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function handleFileUpload(id, docName, event) {
+      const file = event.target.files[0];
+      if (file) {
+        const fileURL = URL.createObjectURL(file);
+        uploadedDocuments[docName] = fileURL;
+
+        const optionsDiv = document.getElementById(`file-${id}`);
+        optionsDiv.innerHTML = `
+          <a href="${fileURL}" target="_blank" class="view-btn">View</a>
+          <button class="remove-btn" onclick="removeFile('${id}', '${docName}')">Remove</button>
+        `;
+      }
+    }
+
+    function removeFile(id, docName) {
+      delete uploadedDocuments[docName];
+      const optionsDiv = document.getElementById(`file-${id}`);
+      optionsDiv.innerHTML = "";
+    }
+
+    function saveDocuments() {
+      console.log("Saved Documents:", uploadedDocuments);
+      alert("Documents saved successfully!");
+    }
+
+    renderDocumentList();
+  </script>
+</body>
+</html>

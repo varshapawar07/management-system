@@ -1,0 +1,425 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding-top: 70px; /* Offset for fixed navbar */
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin-right: 8%;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .active {
+      color: #27ae60;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .dashboard-container {
+      text-align: center;
+      margin: 100px auto 50px;
+      max-width: 1200px;
+      padding: 40px 20px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard-container h1 {
+      color: #2c3e50;
+      font-size: 36px;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .dashboard-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+      padding: 0 10px;
+    }
+
+    .section-card {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: 500;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+      animation: rotateLight 6s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotateLight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .section-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-card a {
+      text-decoration: none;
+      color: white;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .dashboard-container p {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container h1 { font-size: 28px; }
+      .section-card { font-size: 18px; padding: 30px 15px; }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-container { padding: 30px 15px; }
+      .section-card { font-size: 16px; padding: 25px 10px; }
+      .nav-links { gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">StudentSys</div>
+    <ul class="nav-links">
+       <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="student-dashboard.html"> Services</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+
+     <li>
+         <div class="profile-icon" onclick="location.href='studentprofile.html'">U</div>
+     </li>
+    
+    </ul>
+  </nav>
+
+<div class="dashboard-container">
+  <h1>Student Dashboard</h1>
+
+  <div class="dashboard-sections">
+    <div class="section-card"><a href="academicinfo.html">General Info</a></div>
+    <div class="section-card"><a href="documents.html">Documents</a></div>
+    <div class="section-card"><a href="academicinfos.html">Academic Documents</a></div>
+    <div class="section-card"><a href="payment.html">Academic Fee</a></div>
+    <div class="section-card"><a href="placementinfo.html">Placement Section</a></div>
+    <div class="section-card"><a href="scholarshipinfo.html">Scholarship Section</a></div>
+    <div class="section-card"><a href="intership.html">Internship</a></div>
+    <div class="section-card"><a href="Achievement.html">Achievement Certificate</a></div>
+  </div>
+
+  <p>Welcome to your dashboard. Please select an option above to proceed.</p>
+</div>
+
+<script>
+  // Dynamically highlight active navigation link based on the current page
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    if (window.location.pathname.includes(link.getAttribute('href'))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding-top: 70px; /* Offset for fixed navbar */
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin-right: 8%;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .active {
+      color: #27ae60;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .dashboard-container {
+      text-align: center;
+      margin: 100px auto 50px;
+      max-width: 1200px;
+      padding: 40px 20px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard-container h1 {
+      color: #2c3e50;
+      font-size: 36px;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .dashboard-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+      padding: 0 10px;
+    }
+
+    .section-card {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: 500;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+      animation: rotateLight 6s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotateLight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .section-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-card a {
+      text-decoration: none;
+      color: white;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .dashboard-container p {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container h1 { font-size: 28px; }
+      .section-card { font-size: 18px; padding: 30px 15px; }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-container { padding: 30px 15px; }
+      .section-card { font-size: 16px; padding: 25px 10px; }
+      .nav-links { gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">StudentSys</div>
+    <ul class="nav-links">
+       <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="student-dashboard.html"> Services</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+
+      <li>
+        <div class="profile-icon" onclick="location.href=''">U</div>
+      </li>
+    
+    </ul>
+  </nav>
+
+<div class="dashboard-container">
+  <h1>Student Dashboard</h1>
+
+  <div class="dashboard-sections">
+    <div class="section-card"><a href="academicinfo.html">General Info</a></div>
+    <div class="section-card"><a href="documents.html">Documents</a></div>
+    <div class="section-card"><a href="academicinfos.html">Academic Documents</a></div>
+    <div class="section-card"><a href="payment.html">Academic Fee</a></div>
+    <div class="section-card"><a href="placementinfo.html">Placement Section</a></div>
+    <div class="section-card"><a href="scholarshipinfo.html">Scholarship Section</a></div>
+    <div class="section-card"><a href="intership.html">Internship</a></div>
+    <div class="section-card"><a href="Achievement.html">Achievement Certificate</a></div>
+  </div>
+
+  <p>Welcome to your dashboard. Please select an option above to proceed.</p>
+</div>
+
+<script>
+  // Dynamically highlight active navigation link based on the current page
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    if (window.location.pathname.includes(link.getAttribute('href'))) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

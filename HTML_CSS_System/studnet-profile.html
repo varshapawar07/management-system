@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Profile</title>
+</head>
+<body>
+  <h1>Student Profile</h1>
+  <div id="profileData"></div>
+
+  <script>
+    async function loadProfile() {
+      const email = localStorage.getItem("studentEmail");
+      if (!email) {
+        document.getElementById("profileData").innerHTML = "No student data found.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/students/${email}`);
+        const student = await res.json();
+
+        const html = `
+          <img src="${student.profilePhoto}" width="120" style="border-radius: 50%;" /><br><br>
+          <strong>Name:</strong> ${student.name}<br>
+          <strong>PRN:</strong> ${student.prn}<br>
+          <strong>ABC ID:</strong> ${student.abcId}<br>
+          <strong>Roll No:</strong> ${student.rollNo}<br>
+          <strong>DOB:</strong> ${student.dob}<br>
+          <strong>Branch:</strong> ${student.branch}<br>
+          <strong>Phone:</strong> ${student.phone}<br>
+          <strong>Email:</strong> ${student.email}<br>
+          <strong>Admission Year:</strong> ${student.admissionYear}<br>
+          <strong>Admission Mode:</strong> ${student.admissionMode}<br>
+          <strong>Category:</strong> ${student.category}<br>
+          <strong>Sub-Caste:</strong> ${student.subCaste}<br>
+        `;
+        document.getElementById("profileData").innerHTML = html;
+      } catch (err) {
+        document.getElementById("profileData").innerHTML = "Failed to load profile.";
+      }
+    }
+
+    loadProfile();
+  </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile</title>
+  <style>
+    /* Basic styling for profile */
+    #profile {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    #profile img {
+      border-radius: 50%;
+      width: 120px;
+    }
+    #profile h1 {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+    #profile p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body> -->
+
+  <!-- Profile Page -->
+  <!-- <h1>Student Profile</h1>
+  <div id="profile">
+    <img id="profilePhoto" src="" alt="Profile Photo" />
+    <h1 id="profileName">Loading...</h1>
+    <p><strong>PRN:</strong> <span id="profilePRN">---</span></p>
+    <p><strong>Email:</strong> <span id="profileEmail">---</span></p>
+    <p><strong>Branch:</strong> <span id="profileBranch">---</span></p> -->
+    <!-- Add more fields as needed -->
+  <!-- </div>
+
+  <script>
+    window.onload = async function() {
+      // First attempt to fetch the profile using the email stored in localStorage
+      const email = localStorage.getItem("studentEmail");
+      if (email) {
+        try {
+          const res = await fetch(`http://localhost:3000/api/students/${email}`);
+          const student = await res.json();
+          if (student) {
+            // Update profile with data from email-based API call
+            document.getElementById('profileName').innerText = student.name;
+            document.getElementById('profilePhoto').src = student.profilePhoto;
+            document.getElementById('profilePRN').innerText = student.prn;
+            document.getElementById('profileEmail').innerText = student.email;
+            document.getElementById('profileBranch').innerText = student.branch;
+            return; // Exit early once data is fetched and set
+          }
+        } catch (err) {
+          document.getElementById('profile').innerHTML = "Failed to load profile via email.";
+        }
+      }
+
+      // If email-based data fetch fails, attempt to fetch using PRN
+      const prn = localStorage.getItem('studentPRN');
+      if (!prn) {
+        return alert("No student data found. Please log in first.");
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/student/${prn}`);
+        const student = await res.json();
+        document.getElementById('profileName').innerText = student.name;
+        document.getElementById('profilePhoto').src = student.profileImage;
+        document.getElementById('profilePRN').innerText = student.prn;
+        document.getElementById('profileEmail').innerText = student.email;
+        document.getElementById('profileBranch').innerText = student.branch;
+        // Add more fields as needed
+      } catch (err) {
+        document.getElementById('profile').innerHTML = "Failed to load profile via PRN.";
+      }
+    };
+  </script>
+  
+</body>
+</html> -->

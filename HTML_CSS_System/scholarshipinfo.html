@@ -1,0 +1,319 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scholarship Form Upload</title>
+    <style>
+      /* Navigation Bar Styles */
+      /* General Reset */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    padding-top: 70px; /* Offset for fixed navbar */
+  }
+
+  /* Navbar Styling */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #27ae60;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin-right: 8%;
+  }
+
+  .nav-links a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .active {
+        color: #27ae60;
+      }
+
+
+  .profile-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  /* Scholarship Container */
+  .scholarship-container {
+    max-width: 1000px;     /* Increase this if you want a larger max limit */
+    width: 80%;            /* Increase this to occupy more horizontal space */
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 24px;
+  }
+
+  p {
+    color: #555;
+    font-size: 16px;
+  }
+
+  /* Upload Section */
+  .upload-section {
+    margin-top: 20px;
+    padding: 8px 20px;
+  font-size: 14px;
+
+  }
+
+  .upload-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+
+  .upload-btn:hover {
+    background: #0056b3;
+  }
+
+  .file-name {
+    margin-top: 12px;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  /* Action Buttons */
+  .action-buttons {
+    margin-top: 20px;
+  }
+
+  .view-btn,
+  .delete-btn {
+    padding: 8px 16px;
+    margin: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+
+  .view-btn {
+    background: #27ae60;
+    color: white;
+  }
+
+  .view-btn:hover {
+    background: #219150;
+  }
+
+  .delete-btn {
+    background: #dc3545;
+    color: white;
+  }
+
+  .delete-btn:hover {
+    background: #c82333;
+  }
+
+  /* Navigation Buttons (Next / Back / Submit) */
+  .navigation-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+  }
+
+  /* Common styles for all nav buttons */
+  .navigation-buttons .nav-btn,
+  .navigation-buttons .submit-btn,
+  .navigation-buttons .next-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+  }
+
+  /* Hover and click effects */
+  .navigation-buttons .nav-btn:hover,
+  .navigation-buttons .submit-btn:hover,
+  .navigation-buttons .next-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+  }
+
+  .navigation-buttons .nav-btn:active,
+  .navigation-buttons .submit-btn:active,
+  .navigation-buttons .next-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 6px rgba(0, 123, 255, 0.2);
+  }
+  .upload-submit-container {
+    display: flex;
+    gap: 20px; /* space between buttons */
+    align-items: center;
+    justify-content: center; /* center horizontally */
+    margin-top: 20px;
+  }
+
+  .upload-submit-container .upload-btn,
+  .upload-submit-container .submit-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+  }
+
+  .upload-submit-container .upload-btn:hover,
+  .upload-submit-container .submit-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+  }
+
+  .upload-submit-container .upload-btn:active,
+  .upload-submit-container .submit-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 6px rgba(0, 123, 255, 0.2);
+  }
+
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">StudentSys</div>
+      <ul class="nav-links">
+        <li><a href="Home.html" class="active">Home</a></li>
+        <li><a href="about.html" class="active">About Us</a></li>
+        <li><a href="student-dashboard.html"> Services</a></li>
+        <li><a href="contact.html" class="active">Contact Us</a></li>
+
+        <li>
+          <div class="profile-icon" onclick="location.href=''">U</div>
+        </li>
+      
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="scholarship-container">
+      <h2>Scholarship Form Upload</h2>
+      <p>Please upload your scholarship form in PDF format.</p>
+
+      <div class="upload-submit-container">
+    <label for="scholarshipUpload" id="uploadBtn" class="upload-btn">Upload Scholarship Form</label>
+    <input type="file" id="scholarshipUpload" accept=".pdf" style="display: none;" onchange="handleFileUpload(event)" />
+
+    <button class="submit-btn" onclick="submitForm()">Submit</button>
+  </div>
+  <p id="fileName" class="file-name" style="display: none;"></p>
+
+      <div class="upload-section">
+        <input type="file" id="scholarshipUpload" accept=".pdf" style="display: none;" onchange="handleFileUpload(event)" />
+        <!-- <label for="scholarshipUpload" id="uploadBtn" class="upload-btn">Upload Scholarship Form</label> -->
+        <p id="fileName" class="file-name" style="display: none;"></p>
+      </div>
+
+      <div id="actionButtons" class="action-buttons" style="display: none;">
+        <button class="view-btn" onclick="viewFile()">View Form</button>
+        <button class="delete-btn" onclick="removeFile()">Remove Form</button>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="nav-btn back-btn" onclick="window.location.href='placementinfo.html'">← Back</button>
+        <!-- <button class="submit-btn" onclick="submitForm()">Submit</button> -->
+        <button class="next-btn" onclick="window.location.href='intership.html'">Next →</button>
+      </div>
+    </div>
+
+    <script>
+      let uploadedFile = null;
+
+      function handleFileUpload(event) {
+        uploadedFile = event.target.files[0];
+        if (uploadedFile) {
+          document.getElementById('fileName').textContent = "Uploaded File: " + uploadedFile.name;
+          document.getElementById('fileName').style.display = 'block';
+          document.getElementById('uploadBtn').textContent = 'Replace Scholarship Form';
+          document.getElementById('actionButtons').style.display = 'block';
+        }
+      }
+
+      function viewFile() {
+        if (uploadedFile) {
+          const fileURL = URL.createObjectURL(uploadedFile);
+          window.open(fileURL, '_blank');
+        }
+      }
+
+      function removeFile() {
+        uploadedFile = null;
+        document.getElementById('fileName').style.display = 'none';
+        document.getElementById('uploadBtn').textContent = 'Upload Scholarship Form';
+        document.getElementById('actionButtons').style.display = 'none';
+        document.getElementById('scholarshipUpload').value = "";
+      }
+
+      function submitForm() {
+        if (uploadedFile) {
+          alert('All details submitted successfully!');
+          window.location.href = "/confirmation.html";
+        } else {
+          alert('Please upload your scholarship form first.');
+        }
+      }
+    </script>
+  </body>
+  </html>

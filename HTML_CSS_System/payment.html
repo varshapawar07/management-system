@@ -1,0 +1,297 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Student Fee Receipt Upload</title>
+      <style>
+        body, html {
+          margin: 0;  
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: #f0f2f5;
+        }
+        /* Navbar styles */
+        .navbar {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 5%;
+          background-color: white;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+          font-size: 24px;
+          font-weight: bold;
+          color: #27ae60;
+        }
+
+        .nav-links {
+          list-style: none;
+          display: flex;
+          gap: 30px;
+          margin-right: 8%;
+        }
+
+        .nav-links li {
+          display: inline;
+        }
+
+        .nav-links a {
+          text-decoration: none;
+          color: black;
+          font-size: 16px;
+          font-weight: 500;
+        }
+
+        .active {
+          color: #27ae60;
+        }
+
+
+        .profile-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: #ccc;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          margin-left: 20px;
+          cursor: pointer;
+        }
+
+        .container {
+          max-width: 1000px;
+          margin: 100px auto 40px auto; /* Add top margin to avoid navbar overlap */
+          background: #fff;
+          padding: 30px 40px;
+          border-radius: 12px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+          text-align: center;
+          margin-bottom: 30px;
+          color: #2c3e50;
+          font-size: 30px;
+        }
+
+        .year-section {
+          margin-bottom: 30px;
+          border: 1px solid #ddd;
+          padding: 20px;
+          border-radius: 10px;
+          background: #f9f9f9;
+        }
+
+        .year-section h3 {
+          margin-top: 0;
+          color: #2c3e50;
+          
+        }
+
+        label {
+          display: block;
+          margin-top: 10px;
+          font-weight: 500;
+        }
+
+        input[type="number"],
+        input[type="file"] {
+          width: 100%;
+          padding: 8px;
+          margin-top: 5px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          font-size: 15px;
+        }
+
+        .receipt-group {
+          margin-top: 10px;
+          border: 1px dashed #aaa;
+          padding: 15px;
+          border-radius: 8px;
+          background: #fff;
+        }
+
+        .add-receipt-btn {
+          margin-top: 15px;
+          padding: 8px 15px;
+          background: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        .add-receipt-btn:hover {
+          background-color: #007bff;
+        }
+
+.nav-btn {
+  padding: 10px 20px;     /* More space inside the button */
+  font-size: 16px;         /* Bigger text */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: space-evenly;
+  min-width: 90px;        /* Optional: sets a minimum width */
+  height: 40px;            /* Optional: sets a fixed height */
+}
+
+
+
+        .nav-btn:hover {
+          background-color: #007bff;
+          transform: translateY(-2px);
+        }
+
+        .nav-btn:active {
+          background-color: #007bff;
+          transform: translateY(1px);
+        }
+
+        .button-container {
+          display: flex;
+          justify-content: space-evenly;
+          gap: 20px;
+          margin-top: 30px;
+        }
+      </style>
+    </head>
+    <body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">StudentSys</div>
+      <ul class="nav-links">
+        <li><a href="Home.html" class="active">Home</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="student-dashboard.html"> Services</a></li>
+          <li><a href="contact.html" class="active">Contact Us</a></li>
+
+          <li>
+            <div class="profile-icon" onclick="location.href=''">U</div>
+          </li>
+        
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <h2>Upload Academic Fee Receipts</h2>
+
+      <!-- Repeat this section for each year (1st to 4th) -->
+      <div class="year-section" id="year1">
+        <h3>1st Year</h3>
+        <div class="receipt-list" id="year1-receipts">
+          <div class="receipt-group">
+            <label>Upload Receipt:</label>
+            <input type="file" name="year1_receipt[]">
+            <label>Fees Paid (₹):</label>
+            <input type="number" name="year1_paid[]" placeholder="e.g., 25000">
+            <label>Free Spare (₹):</label>
+            <input type="number" name="year1_waived[]" placeholder="e.g., 1000">
+            <label>Free Spending (₹):</label>
+            <input type="number" name="year1_penalty[]" placeholder="e.g., 500">
+          </div>
+        </div>
+        <button type="button" class="add-receipt-btn" onclick="addReceipt('year1')">Add More Receipts</button>
+      </div>
+
+      <!-- Repeat for Year 2 to Year 4 -->
+      <div class="year-section" id="year2">
+        <h3>2nd Year</h3>
+        <div class="receipt-list" id="year2-receipts">
+          <div class="receipt-group">
+            <label>Upload Receipt:</label>
+            <input type="file" name="year2_receipt[]">
+            <label>Fees Paid (₹):</label>
+            <input type="number" name="year2_paid[]" placeholder="e.g., 25000">
+            <label>Free Spare (₹):</label>
+            <input type="number" name="year2_waived[]" placeholder="e.g., 1000">
+            <label>Free Spending (₹):</label>
+            <input type="number" name="year2_penalty[]" placeholder="e.g., 500">
+          </div>
+        </div>
+        <button type="button" class="add-receipt-btn" onclick="addReceipt('year2')">Add More Receipts</button>
+      </div>
+
+      <div class="year-section" id="year3">
+        <h3>3rd Year</h3>
+        <div class="receipt-list" id="year3-receipts">
+          <div class="receipt-group">
+            <label>Upload Receipt:</label>
+            <input type="file" name="year3_receipt[]">
+            <label>Fees Paid (₹):</label>
+            <input type="number" name="year3_paid[]" placeholder="e.g., 25000">
+            <label>Free Spare (₹):</label>
+            <input type="number" name="year3_waived[]" placeholder="e.g., 1000">
+            <label>Free Spending (₹):</label>
+            <input type="number" name="year3_penalty[]" placeholder="e.g., 500">
+          </div>
+        </div>
+        <button type="button" class="add-receipt-btn" onclick="addReceipt('year3')">Add More Receipts</button>
+      </div>
+
+      <div class="year-section" id="year4">
+        <h3>4th Year</h3>
+        <div class="receipt-list" id="year4-receipts">
+          <div class="receipt-group">
+            <label>Upload Receipt:</label>
+            <input type="file" name="year4_receipt[]">
+            <label>Fees Paid (₹):</label>
+            <input type="number" name="year4_paid[]" placeholder="e.g., 25000">
+            <label>Fees pare (₹):</label>
+            <input type="number" name="year4_waived[]" placeholder="e.g., 1000">
+            <label>Fees pending (₹):</label>
+            <input type="number" name="year4_penalty[]" placeholder="e.g., 500">
+          </div>
+        </div>
+        <button type="button" class="add-receipt-btn" onclick="addReceipt('year4')">Add More Receipts</button>
+      </div>
+
+      <!-- Navigation Buttons -->
+        <div class="button-container">
+          <button class="nav-btn back-btn" onclick="window.location.href='academicinfos.html'">← Back </button>
+          <button class="nav-btn" onclick="saveDocuments()">Save</button>
+          <button class="nav-btn next-btn" onclick="window.location.href='placementinfo.html'">Next →</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      function addReceipt(yearId) {
+        const receiptContainer = document.getElementById(`${yearId}-receipts`);
+        const newGroup = document.createElement('div');
+        newGroup.className = 'receipt-group';
+        newGroup.innerHTML = `
+          <label>Upload Receipt:</label>
+          <input type="file" name="${yearId}_receipt[]">
+          <label>Fees Paid (₹):</label>
+          <input type="number" name="${yearId}_paid[]" placeholder="e.g., 25000">
+          <label>Free Spare (₹):</label>
+          <input type="number" name="${yearId}_waived[]" placeholder="e.g., 1000">
+          <label>Free Spending (₹):</label>
+          <input type="number" name="${yearId}_penalty[]" placeholder="e.g., 500">
+        `;
+        receiptContainer.appendChild(newGroup);
+      }
+
+      function saveDocuments() {
+        alert('Your fee receipt details have been saved!');
+        // Here, you'd typically gather the form data and send it via AJAX or a form POST.
+      }
+    </script>
+
+
+    </body>
+    </html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Internship Details</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding-top: 70px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: white;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin-right: 8%;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .active {
+      color: #27ae60;
+    }
+
+    .profile-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-left: 20px;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    .entry {
+      border: 1px solid #dcdde1;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background-color: #fafafa;
+      transition: background-color 0.3s ease;
+    }
+
+    .entry:hover {
+      background-color: #f0f3f5;
+    }
+
+    .entry label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .entry input[type="text"],
+    .entry input[type="date"],
+    .entry select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: border 0.3s ease;
+    }
+
+    .entry input[type="file"] {
+      margin-top: 8px;
+    }
+
+    .file-preview {
+      font-size: 14px;
+      color: #007bff;
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .file-preview span {
+      margin-left: 10px;
+      color: red;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 8px 4px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #007bff;
+    }
+
+    .navigation-buttons {
+      margin: 30px auto;
+      max-width: 1000px;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 0 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">StudentSys</div>
+    <ul class="nav-links">
+      <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="student-dashboard.html"> Services</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+      <li>
+        <div class="profile-icon" onclick="location.href=''">U</div>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Internship Details</h1>
+    <form id="internshipForm">
+      <div id="entryContainer">
+        <div class="entry">
+          <label>Company Name:
+            <input type="text" name="companyName[]" placeholder="Enter company name">
+          </label>
+          <label>Job Role:
+            <input type="text" name="jobRole[]" placeholder="Enter job role">
+          </label>
+          <label>Date:
+            <input type="date" name="internshipDate[]">
+          </label>
+          <label>Status:
+            <select name="status[]">
+              <option value="Completed">Completed</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Not Joined Yet">Not Joined Yet</option>
+            </select>
+          </label>
+          <label>Duration:
+            <input type="text" name="duration[]" placeholder="Enter duration (e.g. 6 months)">
+          </label>
+
+          <label>Offer Letter:
+            <input type="file" name="offerLetter[]" onchange="handleFileChange(this)">
+            <div class="file-preview"></div>
+          </label>
+
+          <label>Certificate:
+            <input type="file" name="certificate[]" onchange="handleFileChange(this)">
+            <div class="file-preview"></div>
+          </label>
+
+          <label>Joining Letter:
+            <input type="file" name="joiningLetter[]" onchange="handleFileChange(this)">
+            <div class="file-preview"></div>
+          </label>
+        </div>
+      </div>
+
+      <button type="button" onclick="addInternship()">Add Internship</button>
+    </form>
+
+    <div class="navigation-buttons">
+      <button onclick="window.location.href='scholarshipinfo.html'">← Back </button>
+      <button onclick="saveDocuments()">Save</button>
+      <button onclick="window.location.href='Achievement.html'">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    function addInternship() {
+      const entryContainer = document.getElementById("entryContainer");
+      const firstEntry = document.querySelector(".entry");
+      const newEntry = firstEntry.cloneNode(true);
+
+      newEntry.querySelectorAll("input").forEach(input => {
+        if (input.type !== "file") input.value = "";
+        if (input.type === "file") input.value = null;
+      });
+
+      newEntry.querySelectorAll("select").forEach(select => {
+        select.selectedIndex = 0;
+      });
+
+      newEntry.querySelectorAll(".file-preview").forEach(preview => {
+        preview.innerHTML = "";
+      });
+
+      entryContainer.appendChild(newEntry);
+    }
+
+    function handleFileChange(inputElement) {
+      const previewDiv = inputElement.nextElementSibling;
+      previewDiv.innerHTML = "";
+
+      if (inputElement.files.length > 0) {
+        const file = inputElement.files[0];
+        const fileURL = URL.createObjectURL(file);
+
+        const viewLink = document.createElement("a");
+        viewLink.href = fileURL;
+        viewLink.textContent = file.name;
+        viewLink.target = "_blank";
+        viewLink.style.textDecoration = "underline";
+        viewLink.style.color = "#007bff";
+        viewLink.style.marginRight = "10px";
+
+        const removeBtn = document.createElement("span");
+        removeBtn.textContent = "✖";
+        removeBtn.title = "Remove";
+        removeBtn.onclick = function () {
+          inputElement.value = "";
+          previewDiv.innerHTML = "";
+          URL.revokeObjectURL(fileURL); // Clean up memory
+        };
+
+        previewDiv.appendChild(viewLink);
+        previewDiv.appendChild(removeBtn);
+      }
+    }
+
+    function saveDocuments() {
+      alert("Documents saved successfully (simulated).");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Achievement Certificate Upload</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        padding-top: 70px;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 5%;
+        background-color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #27ae60;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        margin-right: 8%;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .active {
+        color: #27ae60;
+      }
+
+      .profile-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin-left: 20px;
+        cursor: pointer;
+      }
+
+      .container {
+        text-align: center;
+        margin: 40px auto 40px;
+        max-width: 1000px;
+        padding: 40px 20px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="file"], input[type="text"] {
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 60%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin: 10px 5px 0 0;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #007bff;
+      }
+
+      .delete-btn {
+        background-color: #dc3545;
+        margin-left: 15px;
+      }
+
+      .delete-btn:hover {
+        background-color: #c82333;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        background: #e9ecef;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+      }
+
+      .back-btn {
+        background-color: #007bff;
+      }
+
+      .save-btn {
+        background-color: #007bff;
+      }
+
+      .back-btn:hover,
+      .save-btn:hover {
+        background-color: #007bff;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Fixed Navbar -->
+    <nav class="navbar">
+      <div class="logo">StudentSys</div>
+      <div class="nav-links">
+        <a href="Home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="student-dashboard.html">Services</a>
+        <div class="profile-icon" onclick="location.href=''">U</div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <h1>Upload Achievement Certificates</h1>
+
+      <!-- Student Name Input -->
+      <input type="text" id="studentNameInput" placeholder="Enter your certificate name" />
+
+      <!-- File Input and Add Button -->
+      <br>
+      <input type="file" id="certificateInput" name="certificate" accept=".pdf,.jpg,.jpeg,.png">
+      <button onclick="addCertificate()">Add Certificate</button>
+
+      <h3>Uploaded Certificates</h3>
+      <ul id="certificateList"></ul>
+
+      <!-- Back and Save Buttons -->
+      <div class="button-group">
+        <button class="nav-btn back-btn" onclick="window.location.href='intership.html'">⬅ Back</button>
+        <button class="save-btn" onclick="saveCertificates()">Save</button>
+      </div>
+    </div>
+
+    <script>
+      const certificateList = document.getElementById('certificateList');
+
+      function addCertificate() {
+        const input = document.getElementById('certificateInput');
+        const file = input.files[0];
+
+        if (file) {
+          const listItem = document.createElement('li');
+          const fileLink = document.createElement('a');
+          fileLink.href = URL.createObjectURL(file);
+          fileLink.textContent = file.name;
+          fileLink.target = '_blank';
+
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.className = 'delete-btn';
+          deleteButton.onclick = () => certificateList.removeChild(listItem);
+
+          listItem.appendChild(fileLink);
+          listItem.appendChild(deleteButton);
+          certificateList.appendChild(listItem);
+
+          input.value = ''; // reset file input
+        } else {
+          alert('Please select a certificate to upload.');
+        }
+      }
+
+      function saveCertificates() {
+        const input = document.getElementById('certificateInput');
+        const file = input.files[0];
+        const studentId = '663e04e2c097556b4a4b71e2'; // Example: Replace with actual logic if dynamic
+        const name = document.getElementById('studentNameInput').value;
+
+        if (!file) {
+          alert('Please select a certificate to upload.');
+          return;
+        }
+
+        if (!name) {
+          alert('Please enter your name.');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('certificate', file);
+        formData.append('studentId', studentId);
+        formData.append('name', name);
+
+        fetch('/api/certificates/upload', {
+          method: 'POST',
+          body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message);
+          input.value = '';
+          document.getElementById('studentNameInput').value = '';
+          certificateList.innerHTML = ''; // clear list
+        })
+        .catch(err => {
+          console.error('Upload failed:', err);
+          alert('Upload failed.');
+        });
+      } 
+    </script>
+
+  </body>
+  </html>
